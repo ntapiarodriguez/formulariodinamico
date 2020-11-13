@@ -1,0 +1,31 @@
+<form autocomplete="off" [formGroup]="form">
+	<ng-container *ngFor="let item of tempData" [ngTemplateOutlet]="item.template" [ngTemplateOutletContext]="{item: item, form: form}">
+	</ng-container>
+</form>
+
+<hr>
+<pre>
+  Estado del formulario: {{ form.valid }}
+  <br>
+  Status: {{ form.status }}
+</pre>
+
+<pre>
+
+  {{ form.value | json }}
+
+</pre>
+
+
+<ng-template #texto let-item="item" let-form="form">
+	<div class="form-group row">
+		<label class="col-2 col-form-label">{{item.nombre}}</label>
+		<div class="col-8">
+			<input class="form-control" 
+			type="text" 
+			placeholder="{{item.placeholder}}"
+			[formControl]="form.get(item.nombre)"
+			>
+		</div>
+	</div>
+</ng-template>
