@@ -1,0 +1,10 @@
+<div class="form-group row">
+    <label class="col-2 col-form-label">{{data.nombre}}</label>
+    <div class="col-8">
+        <input class="form-control" 
+        type="text" 
+        placeholder="{{data.placeholder}}"
+        [formControl]="form.get(data.nombre)"
+        >
+    </div>
+</div>

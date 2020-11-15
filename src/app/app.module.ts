@@ -7,7 +7,10 @@ import { AppComponent } from './app.component';
 import { TemplateComponent } from './pages/template/template.component';
 import { ReactiveComponent } from './pages/reactive/reactive.component';
 import { ReactiveDinamicoComponent } from './pages/reactive-dinamico/reactive-dinamico.component';
-import { TextoComponent } from './pages/reactive-dinamico/texto/texto.component';
+import { ReactiveComponentesDinamicosComponent } from './pages/reactive-componentes-dinamicos/reactive-componentes-dinamicos.component';
+import { TextoComponent } from './pages/reactive-componentes-dinamicos/items/texto/texto.component';
+import { ItemsDirective } from './pages/reactive-componentes-dinamicos/items.directive';
+
 
 @NgModule({
   declarations: [
@@ -15,8 +18,11 @@ import { TextoComponent } from './pages/reactive-dinamico/texto/texto.component'
     TemplateComponent,
     ReactiveComponent,
     ReactiveDinamicoComponent,
-    TextoComponent
+    ReactiveComponentesDinamicosComponent,
+    TextoComponent,
+    ItemsDirective
   ],
+  entryComponents: [ TextoComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
