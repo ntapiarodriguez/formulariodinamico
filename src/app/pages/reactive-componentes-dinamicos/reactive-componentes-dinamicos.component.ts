@@ -13,8 +13,8 @@ import { InputConfiguracion } from './input-configuracion';
 export class ReactiveComponentesDinamicosComponent {
 
 	@ViewChild(InputsDirective) inputs: InputsDirective;
-	tempData;
-	test;
+	tempData: any[];
+	test: any;
 	form: FormGroup;
 
 	constructor(private changeDetector: ChangeDetectorRef, private fb: FormBuilder,
@@ -26,17 +26,26 @@ export class ReactiveComponentesDinamicosComponent {
 			new InputConfiguracion (
 				TextoComponent,
 				{
-					nombre: 'name1',
-					placeholder: 'Nombre 1'
+					nombre: 'nombre',
+					titulo: 'Nombre',
+					placeholder: 'Ingrese el nombre',
+					validaciones: {
+						minimo: 5,
+						requerido: true
+					}
 	
 				}
 			),
 			new InputConfiguracion (
 				TextoComponent,
 				{
-					nombre: 'name2',
-					placeholder: 'Nombre 2'
-	
+					nombre: 'apellido',
+					titulo: 'Apellido',
+					placeholder: 'Ingrese el apellido',
+					validaciones: {
+						minimo: 5,
+						requerido: true
+					}
 				}
 			)
 		];
@@ -52,9 +61,9 @@ export class ReactiveComponentesDinamicosComponent {
 		this.tempData.forEach((item) => {
 			const componentFactory = this.componentFactoryResolver.resolveComponentFactory(item.component);
 			const viewContainerRef = this.inputs.viewContainerRef;
-			const componentRef = viewContainerRef.createComponent<InputFormulario>(componentFactory);
-			componentRef.instance.data = item.data;
-			componentRef.instance.form = this.form;
+			const componentRef = viewContainerRef.createComponent(componentFactory);
+			(<InputFormulario>componentRef.instance).data = item.data;
+			(<InputFormulario>componentRef.instance).form = this.form;
 
 		});
 	}

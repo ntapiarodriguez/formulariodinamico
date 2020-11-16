@@ -11,5 +11,8 @@ export class TextoComponent implements InputFormulario {
   @Input() data: any;
   @Input() form: any;
 
+  get noValido() {
+    return this.form.get(this.data.nombre).invalid && this.form.get(this.data.nombre).touched
+  }
 
 }
