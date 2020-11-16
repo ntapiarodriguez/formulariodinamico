@@ -8,8 +8,8 @@ import { TemplateComponent } from './pages/template/template.component';
 import { ReactiveComponent } from './pages/reactive/reactive.component';
 import { ReactiveDinamicoComponent } from './pages/reactive-dinamico/reactive-dinamico.component';
 import { ReactiveComponentesDinamicosComponent } from './pages/reactive-componentes-dinamicos/reactive-componentes-dinamicos.component';
-import { TextoComponent } from './pages/reactive-componentes-dinamicos/items/texto/texto.component';
-import { ItemsDirective } from './pages/reactive-componentes-dinamicos/items.directive';
+import { TextoComponent } from './pages/reactive-componentes-dinamicos/inputs/texto/texto.component';
+import { InputsDirective } from './pages/reactive-componentes-dinamicos/inputs.directive';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { ItemsDirective } from './pages/reactive-componentes-dinamicos/items.dir
     ReactiveDinamicoComponent,
     ReactiveComponentesDinamicosComponent,
     TextoComponent,
-    ItemsDirective
+    InputsDirective
   ],
   entryComponents: [ TextoComponent ],
   imports: [

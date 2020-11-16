@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, ComponentFactoryResolver, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ItemsDirective } from './items.directive';
-import { ItemFormulario } from './items/item-formulario';
-import { TextoComponent } from './items/texto/texto.component';
+import { InputsDirective } from './inputs.directive';
+import { InputFormulario } from './inputs/input-formulario';
+import { TextoComponent } from './inputs/texto/texto.component';
+import { InputConfiguracion } from './input-configuracion';
 
 @Component({
 	selector: 'app-reactive-componentes-dinamicos',
@@ -11,43 +12,48 @@ import { TextoComponent } from './items/texto/texto.component';
 })
 export class ReactiveComponentesDinamicosComponent {
 
-	@ViewChild(ItemsDirective) formulario: ItemsDirective;
+	@ViewChild(InputsDirective) inputs: InputsDirective;
 	tempData;
+	test;
 	form: FormGroup;
 
 	constructor(private changeDetector: ChangeDetectorRef, private fb: FormBuilder,
 		private componentFactoryResolver: ComponentFactoryResolver) {
-		this.tempData = [
-			{
-				nombre: 'name1',
-				placeholder: 'Nombre',
-				componente: TextoComponent,
-				tipo: 'texto'
-
-			},
-			{
-				nombre: 'name2',
-				placeholder: 'Nombre',
-				componente: TextoComponent,
-				tipo: 'texto'
-			}
-		];
 
 		this.form = this.fb.group({});
 
+		this.tempData = [
+			new InputConfiguracion (
+				TextoComponent,
+				{
+					nombre: 'name1',
+					placeholder: 'Nombre 1'
+	
+				}
+			),
+			new InputConfiguracion (
+				TextoComponent,
+				{
+					nombre: 'name2',
+					placeholder: 'Nombre 2'
+	
+				}
+			)
+		];
+
 		this.tempData.forEach((item) => {
-			this.form.addControl(item.nombre, new FormControl('', [Validators.required, Validators.minLength(5)]));
+			item.form = this.form.addControl(item.data.nombre, new FormControl('', [Validators.required, Validators.minLength(5)]));
 		});
 	}
 
 	ngAfterViewChecked() { this.changeDetector.detectChanges(); }
 
 	ngAfterViewInit() {
-		this.tempData.forEach((data) => {
-			const componentFactory = this.componentFactoryResolver.resolveComponentFactory(TextoComponent);
-			const viewContainerRef = this.formulario.viewContainerRef;
-			const componentRef = viewContainerRef.createComponent<ItemFormulario>(componentFactory);
-			componentRef.instance.data = data;
+		this.tempData.forEach((item) => {
+			const componentFactory = this.componentFactoryResolver.resolveComponentFactory(item.component);
+			const viewContainerRef = this.inputs.viewContainerRef;
+			const componentRef = viewContainerRef.createComponent<InputFormulario>(componentFactory);
+			componentRef.instance.data = item.data;
 			componentRef.instance.form = this.form;
 
 		});

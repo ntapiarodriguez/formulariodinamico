@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[items]',
+  selector: '[inputs]',
 })
-export class ItemsDirective {
+export class InputsDirective {
     constructor(public viewContainerRef: ViewContainerRef) { }
 }
