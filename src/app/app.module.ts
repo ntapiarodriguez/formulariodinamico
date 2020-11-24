@@ -10,6 +10,8 @@ import { ReactiveDinamicoComponent } from './pages/reactive-dinamico/reactive-di
 import { ReactiveComponentesDinamicosComponent } from './pages/reactive-componentes-dinamicos/reactive-componentes-dinamicos.component';
 import { TextoComponent } from './pages/reactive-componentes-dinamicos/inputs/texto/texto.component';
 import { InputsDirective } from './pages/reactive-componentes-dinamicos/inputs.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FechaComponent } from './pages/reactive-componentes-dinamicos/inputs/fecha/fecha.component';
 
 
 @NgModule({
@@ -20,14 +22,17 @@ import { InputsDirective } from './pages/reactive-componentes-dinamicos/inputs.d
     ReactiveDinamicoComponent,
     ReactiveComponentesDinamicosComponent,
     TextoComponent,
-    InputsDirective
+    InputsDirective,
+    FechaComponent
   ],
   entryComponents: [ TextoComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

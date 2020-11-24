@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 interface ErrorValidate {
@@ -66,5 +66,23 @@ export class ValidadoresService {
 
   }
 
+  noValido( form: FormGroup, nombre: string ): Boolean {
+    return form.get(nombre).invalid && form.get(nombre).touched;
+  }
+
+  crearValidadores( data: any ) : ValidatorFn[] {
+    const validators = new Array<ValidatorFn>();
+	for (let validacion in data.validaciones) {
+		switch (validacion) {
+			case 'requerido':
+			validators.push(Validators.required);
+			break;
+			case 'minimo':
+			validators.push(Validators.minLength(parseInt(data.validaciones[validacion], 10)));
+			break;
+		}
+	}
+	return validators;
+  }
 
 }

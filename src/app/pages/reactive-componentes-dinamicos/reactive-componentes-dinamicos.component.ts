@@ -4,6 +4,8 @@ import { InputsDirective } from './inputs.directive';
 import { InputFormulario } from './inputs/input-formulario';
 import { TextoComponent } from './inputs/texto/texto.component';
 import { InputConfiguracion } from './input-configuracion';
+import { ValidadoresService } from 'src/app/services/validadores.service';
+import { FechaComponent } from './inputs/fecha/fecha.component';
 
 @Component({
 	selector: 'app-reactive-componentes-dinamicos',
@@ -18,7 +20,8 @@ export class ReactiveComponentesDinamicosComponent {
 	form: FormGroup;
 
 	constructor(private changeDetector: ChangeDetectorRef, private fb: FormBuilder,
-		private componentFactoryResolver: ComponentFactoryResolver) {
+		private componentFactoryResolver: ComponentFactoryResolver,
+		private validadores: ValidadoresService) {
 
 		this.form = this.fb.group({});
 
@@ -30,7 +33,7 @@ export class ReactiveComponentesDinamicosComponent {
 					titulo: 'Nombre',
 					placeholder: 'Ingrese el nombre',
 					validaciones: {
-						minimo: 5,
+						minimo: 7,
 						requerido: true
 					}
 	
@@ -47,11 +50,20 @@ export class ReactiveComponentesDinamicosComponent {
 						requerido: true
 					}
 				}
+			),
+			new InputConfiguracion (
+				FechaComponent,
+				{
+					nombre: 'fecha',
+					titulo: 'Fecha',
+					placeholder: 'yyyy-mm-dd'
+				}
 			)
 		];
 
 		this.tempData.forEach((item) => {
-			item.form = this.form.addControl(item.data.nombre, new FormControl('', [Validators.required, Validators.minLength(5)]));
+			item.form = this.form.addControl(item.data.nombre, 
+				new FormControl('', this.validadores.crearValidadores(item.data)));
 		});
 	}
 

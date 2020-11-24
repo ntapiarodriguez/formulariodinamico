@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ValidadoresService } from 'src/app/services/validadores.service';
 import { InputFormulario } from '../input-formulario';
 
 
@@ -11,8 +12,6 @@ export class TextoComponent implements InputFormulario {
   @Input() data: any;
   @Input() form: any;
 
-  get noValido() {
-    return this.form.get(this.data.nombre).invalid && this.form.get(this.data.nombre).touched
-  }
+  constructor(public validadores: ValidadoresService ) {}
 
 }

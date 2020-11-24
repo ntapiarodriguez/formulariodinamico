@@ -1,0 +1,12 @@
+<div class="form-group row">
+    <label class="col-2 col-form-label">{{data.titulo}}</label>
+    <div class="col-8">
+        <div class="input-group">
+            <input class="form-control" placeholder="{{data.placeholder}}" [formControl]="form.get(data.nombre)"
+                ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+        </div>
+    </div>
+</div>

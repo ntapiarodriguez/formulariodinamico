@@ -5,10 +5,10 @@
         type="text" 
         placeholder="{{data.placeholder}}"
         [formControl]="form.get(data.nombre)"
-        [class.is-invalid]="noValido"
+        [class.is-invalid]="validadores.noValido(form, data.nombre)"
         >
-        <small *ngIf="noValido" class="text-danger">
-            Ingrese 5 letras
+        <small *ngIf="validadores.noValido(form, data.nombre)" class="text-danger">
+            Ingrese {{data.validaciones.minimo}} letras
         </small>
     </div>
 </div>
